@@ -4,7 +4,7 @@ import { ref, watch } from "vue";
 const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
 const cart = ref(storedCart);
 
-// Проверка: есть ли товар в корзине
+// Проверка есть ли товар в корзине
 const isInCart = (id) => cart.value.some((item) => item.id === id);
 
 // Добавить в корзину
@@ -40,6 +40,6 @@ export function useCartActions() {
     addToCart,
     removeFromCart,
     onClickAddPlus,
-    isInCart, // 👈 добавлено
+    isInCart, // 
   };
 }
