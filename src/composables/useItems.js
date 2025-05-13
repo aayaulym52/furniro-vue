@@ -44,7 +44,7 @@ export default function useItems(cart) {
   const addToFavorite = async (item) => {
     try {
       if (!item.isFavorite) {
-        // Если товар не в избранном — отправляем POST-запрос для добавления
+        // Если товар не в избранном отправляем POST-запрос для добавления
         const obj = { item_id: item.id };
         const { data } = await axios.post(
           "https://f800924d181b5299.mokky.dev/favorites",
