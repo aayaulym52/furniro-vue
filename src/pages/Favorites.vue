@@ -17,7 +17,6 @@ const favorites = ref([]);
 // Флаг загрузки
 const isLoading = ref(true);
 
-// Подключаем действия корзины
 
 // При загрузке компонента:
 onMounted(async () => {
