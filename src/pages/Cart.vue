@@ -1,29 +1,18 @@
 <script setup>
-import { inject, ref, computed } from "vue"; // Импортируем computed
+import { inject, ref, computed } from "vue"; 
 import axios from "axios";
 import CartItemList from "../components/CartItemList.vue";
 import PageHeader from "../components/PageHeader.vue";
 
-// Получаем доступ к глобальной корзине через provide/inject
 const { cart } = inject("cart");
-
-// Вычисляем общую сумму всех товаров в корзине
 const totalPrice = computed(() =>
   cart.value.reduce((acc, item) => acc + item.price, 0)
 );
-
-// Состояние, показывающее идёт ли сейчас создание заказа
 const isCreating = ref(false);
-
-// Сохраняем ID созданного заказа, если он был оформлен
 const orderId = ref(null);
-
-// Функция создания заказа
 const createOrder = async () => {
   try {
-    isCreating.value = true; // Блокируем кнопку на время выполнения
-
-    // Отправляем заказ на сервер с содержимым корзины и итоговой суммой
+    isCreating.value = true;
     const { data } = await axios.post(
       `https://f800924d181b5299.mokky.dev/orders`,
       {
@@ -31,21 +20,15 @@ const createOrder = async () => {
         totalPrice: totalPrice.value,
       }
     );
-    // После успешного заказа очищаем корзину
     cart.value = [];
-
-    // Сохраняем ID нового заказа
     orderId.value = data.id;
   } catch (err) {
     console.log(err);
   } finally {
-    // Разблокируем кнопку
     isCreating.value = false;
   }
 };
-// Проверка: пуста ли корзина
 const cartIsEmpty = computed(() => cart.value.length === 0);
-// Управляем доступностью кнопки оформления заказа
 const buttonDisabled = computed(() => isCreating.value || cartIsEmpty.value);
 </script>
 
