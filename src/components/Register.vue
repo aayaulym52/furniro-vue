@@ -76,7 +76,7 @@ export default {
         if (res.ok) {
           localStorage.setItem("token", result.token);
           alert("Регистрация прошла успешно!");
-          this.$router.push("/"); // Перенаправляем на главную страницу
+          this.$router.push("/"); 
         } else {
           alert(
             "Ошибка: " + (result.message || "Не удалось зарегистрироваться")
