@@ -5,20 +5,11 @@ import CardList from "../components/CardList.vue";
 import useItems from "../composables/useItems";
 import axios from "axios";
 
-// Получаем корзину и функцию добавления из контекста
 const { cart, onClickAddPlus } = inject("cart");
-
-// Получаем только функцию для работы с избранным
 const { addToFavorite } = useItems(cart);
-
-// Список избранных товаров
 const favorites = ref([]);
-
-// Флаг загрузки
 const isLoading = ref(true);
 
-
-// При загрузке компонента:
 onMounted(async () => {
   isLoading.value = true;
 
@@ -39,7 +30,6 @@ onMounted(async () => {
   }
 });
 
-// Удаление из избранного
 const removeFromFavorites = async (item) => {
   await addToFavorite(item);
   favorites.value = favorites.value.filter((fav) => fav.id !== item.id);
@@ -50,7 +40,6 @@ const removeFromFavorites = async (item) => {
   <PageHeader pageTitle="Favorites" />
 
   <div class="px-5 mt-6">
-    <!-- Если список не пуст — показываем карточки -->
     <div v-if="favorites.length > 0">
       <CardList
         :items="favorites"
@@ -59,8 +48,6 @@ const removeFromFavorites = async (item) => {
         @add-to-cart="onClickAddPlus"
       />
     </div>
-
-    <!-- Если избранное пустое — показываем заглушку -->
     <div v-else class="flex flex-col items-center mt-10 h-screen">
       <h2 class="text-2xl font-bold mt-4">
         Your favorites list is currently empty :(
