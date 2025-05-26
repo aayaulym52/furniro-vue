@@ -4,13 +4,13 @@
     <form @submit.prevent="login">
       <div class="p-8 flex flex-col items-center gap-3">
         <input
-          class="w-80 py-3 rounded-lg outline-none px-10 bg-zinc-200"
+          class="w-80 py-3 rounded-lg outline-none px-10 bg-zinc-100 border border-slate-300 hover:border-slate-400 transition"
           type="email"
           placeholder="Email"
           v-model="email"
         />
         <input
-          class="w-80 py-3 rounded-lg outline-none px-10 bg-zinc-200"
+          class="w-80 py-3 rounded-lg outline-none px-10 bg-zinc-100 border border-slate-300 hover:border-slate-400 transition"
           type="password"
           placeholder="Password"
           v-model="password"
@@ -25,49 +25,50 @@
         </button>
       </div>
     </form>
+    <p class="text-center mt-4">
+      Do not have account?
+      <button @click="$emit('switch')" class="text-blue-500">Sign up</button>
+    </p>
   </div>
-  <p class="text-center mt-4">
-    Do not have account?
-    <button @click="$emit('switch')" class="text-blue-500">Sign up</button>
-  </p>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      email: "",
-      password: "",
-    };
-  },
-  methods: {
-    async login() {
-      try {
-        const res = await fetch("https://f800924d181b5299.mokky.dev/auth", {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: this.email,
-            password: this.password,
-          }),
-        });
+<script setup>
+import { ref } from "vue";
+import { useRouter } from "vue-router";
 
-        const result = await res.json();
+defineEmits(["switch"]);
 
-        if (res.ok) {
-          localStorage.setItem("token", result.token);
-          alert("Вход выполнен!");
-          this.$router.push("/");
-        } else {
-          alert("Ошибка: " + (result.message || "Неверный email или пароль"));
-        }
-      } catch (err) {
-        alert("Ошибка входа: " + err.message);
-      }
-    },
-  },
+const email = ref("");
+const password = ref("");
+
+const router = useRouter();
+
+const login = async () => {
+  try {
+    const res = await fetch("https://f800924d181b5299.mokky.dev/auth", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email.value,
+        password: password.value,
+      }),
+    });
+
+    const result = await res.json();
+
+    if (res.ok) {
+      localStorage.setItem("token", result.token);
+      localStorage.setItem("currentUser", JSON.stringify(result.user));
+      alert("Вход выполнен!");
+      router.push("/");
+    } else {
+      alert("Ошибка: " + (result.message || "Неверный email или пароль"));
+    }
+  } catch (err) {
+    alert("Ошибка входа: " + err.message);
+  }
 };
 </script>

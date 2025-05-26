@@ -10,6 +10,7 @@ import Shop from './pages/Shop.vue'
 import Favorites from "./pages/Favorites.vue";
 import Cart from "./pages/Cart.vue";
 import Profile from "./pages/Profile.vue";
+import Checkout from "./pages/Checkout.vue"
 
 
 
@@ -21,6 +22,7 @@ const routes = [
   { path: "/profile", name: "Profile", component: Profile },
   { path: "/shop", name: "Shop", component: Shop },
   { path: "/contact", name: "Contact", component: Contact },
+  { path: "/checkout", name: "Checkout", component: Checkout },
 ];
 
 const router = createRouter({

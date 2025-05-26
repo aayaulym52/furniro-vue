@@ -1,35 +1,16 @@
 <script setup>
-import { inject, ref, computed } from "vue"; 
-import axios from "axios";
-import CartItemList from "../components/CartItemList.vue";
+import { inject, ref, computed } from "vue";
+import CartItem from "../components/CartItem.vue";
 import PageHeader from "../components/PageHeader.vue";
 
 const { cart } = inject("cart");
 const totalPrice = computed(() =>
-  cart.value.reduce((acc, item) => acc + item.price, 0)
+  cart.value.reduce((acc, item) => acc + item.price * item.quantity, 0)
 );
-const isCreating = ref(false);
+
 const orderId = ref(null);
-const createOrder = async () => {
-  try {
-    isCreating.value = true;
-    const { data } = await axios.post(
-      `https://f800924d181b5299.mokky.dev/orders`,
-      {
-        items: cart.value,
-        totalPrice: totalPrice.value,
-      }
-    );
-    cart.value = [];
-    orderId.value = data.id;
-  } catch (err) {
-    console.log(err);
-  } finally {
-    isCreating.value = false;
-  }
-};
+
 const cartIsEmpty = computed(() => cart.value.length === 0);
-const buttonDisabled = computed(() => isCreating.value || cartIsEmpty.value);
 </script>
 
 <template>
@@ -62,7 +43,7 @@ const buttonDisabled = computed(() => isCreating.value || cartIsEmpty.value);
     v-else
     class="container w-full py-14 m-auto flex flex-col lg:flex-row gap-8 px-12"
   >
-    <CartItemList />
+    <CartItem />
     <div
       class="w-full max-w-sm mx-auto bg-[#F9F1E7] p-10 rounded text-center h-fit"
     >
@@ -81,14 +62,13 @@ const buttonDisabled = computed(() => isCreating.value || cartIsEmpty.value);
           >{{ totalPrice.toLocaleString() }}₸</span
         >
       </div>
-
-      <button
-        :disabled="buttonDisabled"
-        @click="createOrder"
-        class="border border-black py-2 px-10 rounded-xl hover:bg-black hover:text-white transition"
+      <router-link to="/checkout">
+        <button
+          class="border border-black py-2 px-10 rounded-xl hover:bg-black hover:text-white transition"
+        >
+          Checkout
+        </button></router-link
       >
-        Place order
-      </button>
     </div>
   </div>
 </template>
