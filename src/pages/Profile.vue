@@ -1,7 +1,6 @@
 <template>
   <div>
     <div v-if="!isLoggedIn">
-      <!-- Показываем либо страницу регистрации, либо входа в зависимости от состояния -->
       <Register v-if="!showLogin" @switch="toggleForm" />
       <Login v-else @switch="toggleForm" />
     </div>
@@ -29,7 +28,7 @@ export default {
   },
   data() {
     return {
-      showLogin: false, // переключатель между формами
+      showLogin: false,
     };
   },
   computed: {

@@ -28,7 +28,6 @@ defineProps({
         class="w-full h-full object-cover"
       />
 
-      <!-- Кнопка добавления/удаления из избранного -->
       <img
         v-if="onClickFavorite"
         :src="!isFavorite ? './images/like-1.png' : './images/like-2.png'"
@@ -37,7 +36,6 @@ defineProps({
         @click="onClickFavorite"
       />
     </div>
-    <!-- Скидка или новинка -->
     <div
       v-if="discount"
       class="absolute top-2 right-2 w-12 h-12 rounded-full flex items-center justify-center bg-[#e97171] text-white text-sm font-medium"
@@ -51,7 +49,6 @@ defineProps({
       NEW
     </div>
 
-    <!-- Прозрачный слой с кнопкой -->
     <div class="absolute inset-0 hover:bg-black/50 transition">
       <button
         class="absolute top-[60%] left-1/2 transform -translate-x-1/2 -translate-y-1/3 bg-white text-yellow-600 font-semibold w-60 py-3 opacity-0 hover:opacity-100"

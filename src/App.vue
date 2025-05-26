@@ -2,13 +2,12 @@
 import Header from "./components/Header.vue";
 import Features from "./components/features.vue";
 import Footer from "./components/Footer.vue";
-
 import { provide } from "vue";
 import { useCartActions } from "./composables/useCart";
 
-const cartContext = useCartActions(); // вызываем, чтобы получить cart и функции
+const cartContext = useCartActions();
 
-provide("cart", cartContext); // здесь уже можно вызывать provide()
+provide("cart", cartContext);
 </script>
 
 <template>

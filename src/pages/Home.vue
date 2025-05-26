@@ -5,9 +5,7 @@ import useItems from "../composables/useItems";
 import CardList from "../components/CardList.vue";
 import Categories from "../components/Categories.vue";
 
-// Используем useCartActions для получения всех необходимых действий с корзиной
 const { cart, onClickAddPlus } = inject("cart");
-
 const { items, fetchItems, fetchFavorites, addToFavorite } = useItems(cart);
 
 onMounted(async () => {

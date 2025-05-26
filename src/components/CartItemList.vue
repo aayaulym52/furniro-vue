@@ -7,7 +7,7 @@ const { cart, removeFromCart } = inject("cart");
 
 <template>
   <div class="flex-1" v-auto-animate>
-    <div class="grid grid-cols-4 bg-[#F9F1E7] px-4 py-3 font-semibold">
+    <div class="grid grid-cols-4  bg-[#F9F1E7] px-4 py-3 font-semibold">
       <span>Product</span>
       <span>Price</span>
       <span>Quantity</span>

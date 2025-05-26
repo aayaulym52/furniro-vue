@@ -13,7 +13,7 @@ const items = [
       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
     </p>
 
-    <div class="flex flex-wrap justify-center gap-6 py-6 px-4">
+    <div class="flex justify-center gap-6 py-6 px-4">
       <div class="max-w-[480px] p-4" v-for="(item, i) in items" :key="i">
         <img :src="item.img" alt="" class="w-full block rounded-lg" />
         <h5 class="text-xl font-semibold text-gray-800 mt-3">
