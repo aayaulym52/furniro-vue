@@ -6,7 +6,6 @@ import CardList from "../components/CardList.vue";
 import Categories from "../components/Categories.vue";
 
 const { cart, onClickAddPlus } = inject("cart");
-
 const { items, fetchItems, fetchFavorites, addToFavorite } = useItems(cart);
 
 onMounted(async () => {

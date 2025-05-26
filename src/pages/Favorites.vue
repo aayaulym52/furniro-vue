@@ -38,7 +38,6 @@ const removeFromFavorites = async (item) => {
 
 <template>
   <PageHeader pageTitle="Favorites" />
-
   <div class="px-5 mt-6">
     <div v-if="favorites.length > 0">
       <CardList

@@ -28,6 +28,6 @@ export function useCartActions() {
     addToCart,
     removeFromCart,
     onClickAddPlus,
-    isInCart, // 
+    isInCart, 
   };
 }

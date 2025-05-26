@@ -60,7 +60,7 @@ export default {
         if (res.ok) {
           localStorage.setItem("token", result.token);
           alert("Вход выполнен!");
-          this.$router.push("/"); // Перенаправляем на главную страницу
+          this.$router.push("/");
         } else {
           alert("Ошибка: " + (result.message || "Неверный email или пароль"));
         }

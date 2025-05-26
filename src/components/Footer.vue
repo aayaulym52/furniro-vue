@@ -1,7 +1,6 @@
 <template>
   <footer class="border-t border-gray-300 bg-white py-10 px-20 mt-10">
     <div class="flex flex-wrap justify-between gap-8">
-      <!-- First Column -->
       <div class="flex-1 min-w-[200px]">
         <h5 class="text-black text-2xl font-bold pb-2">Funiro.</h5>
         <p class="text-gray-500 text-md">
@@ -10,7 +9,6 @@
         </p>
       </div>
 
-      <!-- Second Column: Links -->
       <div class="flex-1 min-w-[200px]">
         <h6 class="text-gray-500 text-lg font-medium mb-2">Links</h6>
         <ul class="list-none p-0">
@@ -29,7 +27,6 @@
         </ul>
       </div>
 
-      <!-- Third Column: Help -->
       <div class="flex-1 min-w-[200px]">
         <h6 class="text-gray-500 text-lg font-medium mb-2">Help</h6>
         <ul class="list-none p-0">
@@ -49,7 +46,6 @@
         </ul>
       </div>
 
-      <!-- Fourth Column: Newsletter -->
       <div class="flex-1 min-w-[200px]">
         <h6 class="text-gray-500 text-lg font-medium mb-2">Newsletter</h6>
         <form class="flex items-center">
@@ -68,7 +64,6 @@
       </div>
     </div>
 
-    <!-- Footer Bottom -->
     <div
       class="border-t border-gray-300 mt-8 pt-2 text-left text-sm text-black"
     >

@@ -5,7 +5,6 @@
   >
     <div class="flex flex-wrap w-full justify-center items-center">
       <div class="hidden md:block basis-1/2"></div>
-      <!-- Пустая левая часть -->
       <div class="basis-full md:basis-1/2">
         <div
           class="rounded-lg p-8 text-left max-w-xl"

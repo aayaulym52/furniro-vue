@@ -34,7 +34,6 @@ const buttonDisabled = computed(() => isCreating.value || cartIsEmpty.value);
 
 <template>
   <PageHeader pageTitle="Cart" />
-
   <div
     v-if="cartIsEmpty || orderId"
     class="flex flex-col items-center gap-4 mt-20 h-screen"
@@ -64,7 +63,6 @@ const buttonDisabled = computed(() => isCreating.value || cartIsEmpty.value);
     class="container w-full py-14 m-auto flex flex-col lg:flex-row gap-8 px-12"
   >
     <CartItemList />
-
     <div
       class="w-full max-w-sm mx-auto bg-[#F9F1E7] p-10 rounded text-center h-fit"
     >

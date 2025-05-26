@@ -2,7 +2,6 @@
 import Header from "./components/Header.vue";
 import Features from "./components/features.vue";
 import Footer from "./components/Footer.vue";
-
 import { provide } from "vue";
 import { useCartActions } from "./composables/useCart";
 
