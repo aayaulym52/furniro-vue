@@ -10,8 +10,6 @@ const addToCart = (item) => {
     cart.value.push({ ...item, quantity: item.quantity || 1 });
   }
 };
-
-
 const removeFromCart = (item) => {
   cart.value = cart.value.filter((cartItem) => cartItem.id !== item.id);
 };
