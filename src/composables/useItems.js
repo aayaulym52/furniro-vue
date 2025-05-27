@@ -9,7 +9,6 @@ export default function useItems(cart) {
       const { data } = await axios.get(
         "https://f800924d181b5299.mokky.dev/items"
       );
-
       items.value = data.map((item) => ({
         ...item,
         isAdded: cart.value.some((cartItem) => cartItem.id === item.id),
@@ -41,7 +40,6 @@ export default function useItems(cart) {
           "https://f800924d181b5299.mokky.dev/favorites",
           obj
         );
-
         item.isFavorite = true;
         item.favoriteId = data.id;
       } else {

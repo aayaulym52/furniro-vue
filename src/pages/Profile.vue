@@ -6,19 +6,15 @@
     </div>
 
     <div v-else class="mt-15 py-20">
-      <ul class="flex gap-10">
-        <li>Orders</li>
-        <li>Favorites</li>
-        <li>Cart</li>
-      </ul>
+      <p>My Orders</p>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, computed } from "vue";
 import Register from "../components/Register.vue";
 import Login from "../components/Login.vue";
-import Favorites from "./Favorites.vue";
 
 export default {
   components: {
@@ -43,3 +39,4 @@ export default {
   },
 };
 </script>
+

@@ -2,14 +2,17 @@
 import { inject, ref, computed } from "vue";
 import axios from "axios";
 import CartItemList from "../components/CartItemList.vue";
+import { inject, ref, computed } from "vue";
+import CartItem from "../components/CartItem.vue";
 import PageHeader from "../components/PageHeader.vue";
 
 const { cart } = inject("cart");
 
 const totalPrice = computed(() =>
-  cart.value.reduce((acc, item) => acc + item.price, 0)
+  cart.value.reduce((acc, item) => acc + item.price * item.quantity, 0)
 );
 const isCreating = ref(false);
+
 const orderId = ref(null);
 
 const createOrder = async () => {
@@ -68,6 +71,7 @@ const buttonDisabled = computed(() => isCreating.value || cartIsEmpty.value);
     class="container w-full py-14 m-auto flex flex-col lg:flex-row gap-8 px-12"
   >
     <CartItemList />
+    <CartItem />
     <div
       class="w-full max-w-sm mx-auto bg-[#F9F1E7] p-10 rounded text-center h-fit"
     >
@@ -86,14 +90,13 @@ const buttonDisabled = computed(() => isCreating.value || cartIsEmpty.value);
           >{{ totalPrice.toLocaleString() }}₸</span
         >
       </div>
-
-      <button
-        :disabled="buttonDisabled"
-        @click="createOrder"
-        class="border border-black py-2 px-10 rounded-xl hover:bg-black hover:text-white transition"
+      <router-link to="/checkout">
+        <button
+          class="border border-black py-2 px-10 rounded-xl hover:bg-black hover:text-white transition"
+        >
+          Checkout
+        </button></router-link
       >
-        Place order
-      </button>
     </div>
   </div>
 </template>

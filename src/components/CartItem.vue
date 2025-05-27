@@ -1,12 +1,8 @@
 <script setup>
-const emit = defineEmits(["onClickRemove"]);
+import { inject } from "vue";
 
-defineProps({
-  id: Number,
-  title: String,
-  imageUrl: String,
-  price: Number,
-});
+const { cart, removeFromCart, increaseQuantity, decreaseQuantity } =
+  inject("cart");
 </script>
 
 <template>
@@ -14,23 +10,61 @@ defineProps({
     <div class="flex items-center gap-4 col-span-1">
       <img :src="imageUrl" alt="title" class="w-20 h-20 object-cover rounded" />
       <span>{{ title }}</span>
+  <div class="flex-1" v-auto-animate>
+    <div class="grid grid-cols-4 bg-[#F9F1E7] px-4 py-3 font-semibold">
+      <span>Product</span>
+      <span>Price</span>
+      <span>Quantity</span>
+      <span>Subtotal</span>
     </div>
 
     <div class="text-gray-700">{{ price.toLocaleString() }}₸</div>
-
-    <div>
-      <input type="number" value="1" class="w-12 border rounded text-center" />
-    </div>
-
-    <div class="flex justify-between">
-      <span>{{ price.toLocaleString() }}₸</span>
-      <button>
+    <div
+      v-for="item in cart"
+      :key="item.id"
+      class="grid grid-cols-4 items-center border-b py-4"
+    >
+      <div class="flex items-center gap-4 col-span-1">
         <img
-          @click="emit('onClickRemove', id)"
-          src="/images/vector-trash.png"
-          class="w-5 h-5 transition"
+          :src="item.imageUrl"
+          alt="item.title"
+          class="w-20 h-20 object-cover rounded"
         />
-      </button>
+        <span>{{ item.title }}</span>
+      </div>
+
+      <div class="text-gray-700">{{ item.price.toLocaleString() }}₸</div>
+
+      <div
+        class="flex items-center bg-[#F9F1E7] rounded-full w-max select-none"
+      >
+        <button
+          @click="decreaseQuantity(item.id)"
+          class="text-xl px-3 hover:text-green-500 transition cursor-pointer"
+          aria-label="Уменьшить количество"
+        >
+          −
+        </button>
+        <span class="px-4 font-medium">{{ item.quantity }}</span>
+        <button
+          @click="increaseQuantity(item.id)"
+          class="text-xl px-3 hover:text-green-500 transition cursor-pointer"
+          aria-label="Увеличить количество"
+        >
+          +
+        </button>
+      </div>
+
+      <div class="flex justify-between">
+        <span>{{ (item.price * item.quantity).toLocaleString() }}₸</span>
+        <button @click="removeFromCart({ id: item.id })">
+          <img
+            src="/images/vector-trash.png"
+            class="w-5 h-5 opacity-70 hover:opacity-100"
+            alt="Удалить"
+          />
+        </button>
+      </div>
     </div>
   </div>
 </template>

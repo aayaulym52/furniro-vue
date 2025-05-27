@@ -6,19 +6,25 @@
     <form @submit.prevent="register">
       <div class="p-8 flex flex-col items-center gap-3">
         <input
-          class="w-80 py-3 rounded-lg outline-none p-10 bg-zinc-200"
+          class="w-80 py-3 rounded-lg outline-none p-10 bg-zinc-100 border border-slate-300 hover:border-slate-400 transition"
           type="text"
           placeholder="Full Name"
           v-model="name"
         />
         <input
-          class="w-80 py-3 rounded-lg outline-none p-10 bg-zinc-200"
+          class="w-80 py-3 rounded-lg outline-none p-10 bg-zinc-100 border border-slate-300 hover:border-slate-400 transition"
+          type="tel"
+          placeholder="Phone"
+          v-model="phone"
+        />
+        <input
+          class="w-80 py-3 rounded-lg outline-none p-10 bg-zinc-100 border border-slate-300 hover:border-slate-400 transition"
           type="email"
           placeholder="Email Address"
           v-model="email"
         />
         <input
-          class="w-80 py-3 rounded-lg outline-none p-10 bg-zinc-200"
+          class="w-80 py-3 rounded-lg outline-none p-10 bg-zinc-100 border border-slate-300 hover:border-slate-400 transition"
           type="password"
           placeholder="Password"
           v-model="password"
@@ -33,45 +39,48 @@
         </button>
       </div>
     </form>
+    <p class="text-center mt-4">
+      Already have an account?
+      <button @click="$emit('switch')" class="text-blue-500">Login</button>
+    </p>
   </div>
-  <p class="text-center mt-4">
-    Already have an account?
-    <button @click="$emit('switch')" class="text-blue-500">Login</button>
-  </p>
 </template>
 
-<script>
-export default {
-  emits: ["switch"],
-  data() {
-    return {
-      name: "",
-      email: "",
-      password: "",
-    };
-  },
-  methods: {
-    async register() {
-      if (!this.name || !this.email || !this.password) {
-        alert("Пожалуйста, заполните все поля!");
-        return;
-      }
+<script setup>
+import { ref } from "vue";
+import { useRouter } from "vue-router";
 
-      try {
-        const res = await fetch("https://f800924d181b5299.mokky.dev/register", {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            fullName: this.name,
-            email: this.email,
-            password: this.password,
-          }),
-        });
+const router = useRouter();
 
-        const result = await res.json();
+const name = ref("");
+const phone = ref("");
+const email = ref("");
+const password = ref("");
+
+defineEmits(["switch"]);
+
+const register = async () => {
+  if (!name.value || !phone.value || !email.value || !password.value) {
+    alert("Пожалуйста, заполните все поля!");
+    return;
+  }
+
+  try {
+    const res = await fetch("https://f800924d181b5299.mokky.dev/register", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        fullName: name.value,
+        phone: phone.value,
+        email: email.value,
+        password: password.value,
+      }),
+    });
+
+    const result = await res.json();
 
         if (res.ok) {
           localStorage.setItem("token", result.token);
@@ -87,5 +96,16 @@ export default {
       }
     },
   },
+    if (res.ok) {
+      localStorage.setItem("token", result.token);
+      localStorage.setItem("currentUser", JSON.stringify(result.user));
+      alert("Регистрация прошла успешно!");
+      router.push("/");
+    } else {
+      alert("Ошибка: " + (result.message || "Не удалось зарегистрироваться"));
+    }
+  } catch (err) {
+    alert("Ошибка регистрации: " + err.message);
+  }
 };
 </script>

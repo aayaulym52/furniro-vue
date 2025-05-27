@@ -38,6 +38,7 @@ const contactInfo = [
         :key="index"
         class="flex flex-col gap-3"
       >
+        
         <div class="flex items-center gap-3">
           <img :src="item.icon" alt="" width="20px" />
           <h3 class="text-2xl font-semibold">{{ item.title }}</h3>
