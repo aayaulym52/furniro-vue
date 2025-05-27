@@ -16,27 +16,15 @@ import { ref, computed } from "vue";
 import Register from "../components/Register.vue";
 import Login from "../components/Login.vue";
 
-export default {
-  components: {
-    Register,
-    Login,
-    Favorites,
-  },
-  data() {
-    return {
-      showLogin: false,
-    };
-  },
-  computed: {
-    isLoggedIn() {
-      return !!localStorage.getItem("token");
-    },
-  },
-  methods: {
-    toggleForm() {
-      this.showLogin = !this.showLogin;
-    },
-  },
-};
+const showLogin = ref(false);
+
+const isLoggedIn = computed(() => {
+  return !!localStorage.getItem("token");
+});
+
+function toggleForm() {
+  showLogin.value = !showLogin.value;
+}
 </script>
+
 

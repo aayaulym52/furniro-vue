@@ -1,8 +1,6 @@
 <script setup>
 import { inject, ref, computed } from "vue";
 import axios from "axios";
-import CartItemList from "../components/CartItemList.vue";
-import { inject, ref, computed } from "vue";
 import CartItem from "../components/CartItem.vue";
 import PageHeader from "../components/PageHeader.vue";
 
@@ -70,7 +68,6 @@ const buttonDisabled = computed(() => isCreating.value || cartIsEmpty.value);
     v-else
     class="container w-full py-14 m-auto flex flex-col lg:flex-row gap-8 px-12"
   >
-    <CartItemList />
     <CartItem />
     <div
       class="w-full max-w-sm mx-auto bg-[#F9F1E7] p-10 rounded text-center h-fit"

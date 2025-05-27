@@ -57,7 +57,7 @@ const phone = ref("");
 const email = ref("");
 const password = ref("");
 
-defineEmits(["switch"]);
+const emit = defineEmits(["switch"]);
 
 const register = async () => {
   if (!name.value || !phone.value || !email.value || !password.value) {
@@ -82,25 +82,11 @@ const register = async () => {
 
     const result = await res.json();
 
-        if (res.ok) {
-          localStorage.setItem("token", result.token);
-          alert("Регистрация прошла успешно!");
-          this.$router.push("/");
-        } else {
-          alert(
-            "Ошибка: " + (result.message || "Не удалось зарегистрироваться")
-          );
-        }
-      } catch (err) {
-        alert("Ошибка регистрации: " + err.message);
-      }
-    },
-  },
     if (res.ok) {
       localStorage.setItem("token", result.token);
       localStorage.setItem("currentUser", JSON.stringify(result.user));
       alert("Регистрация прошла успешно!");
-      router.push("/");
+      router.push("/");  
     } else {
       alert("Ошибка: " + (result.message || "Не удалось зарегистрироваться"));
     }

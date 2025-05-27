@@ -6,9 +6,7 @@ import { provide } from "vue";
 import { useCartActions } from "./composables/useCart";
 
 const cartContext = useCartActions();
-const cartContext = useCartActions(); 
 
-provide("cart", cartContext);
 provide("cart", cartContext); 
 </script>
 

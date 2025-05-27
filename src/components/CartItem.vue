@@ -1,15 +1,10 @@
 <script setup>
 import { inject } from "vue";
 
-const { cart, removeFromCart, increaseQuantity, decreaseQuantity } =
-  inject("cart");
+const { cart, removeFromCart, increaseQuantity, decreaseQuantity } = inject("cart");
 </script>
 
 <template>
-  <div class="grid grid-cols-4 items-center border-b py-4">
-    <div class="flex items-center gap-4 col-span-1">
-      <img :src="imageUrl" alt="title" class="w-20 h-20 object-cover rounded" />
-      <span>{{ title }}</span>
   <div class="flex-1" v-auto-animate>
     <div class="grid grid-cols-4 bg-[#F9F1E7] px-4 py-3 font-semibold">
       <span>Product</span>
@@ -18,7 +13,6 @@ const { cart, removeFromCart, increaseQuantity, decreaseQuantity } =
       <span>Subtotal</span>
     </div>
 
-    <div class="text-gray-700">{{ price.toLocaleString() }}₸</div>
     <div
       v-for="item in cart"
       :key="item.id"
@@ -27,7 +21,7 @@ const { cart, removeFromCart, increaseQuantity, decreaseQuantity } =
       <div class="flex items-center gap-4 col-span-1">
         <img
           :src="item.imageUrl"
-          alt="item.title"
+          :alt="item.title"
           class="w-20 h-20 object-cover rounded"
         />
         <span>{{ item.title }}</span>
@@ -35,9 +29,7 @@ const { cart, removeFromCart, increaseQuantity, decreaseQuantity } =
 
       <div class="text-gray-700">{{ item.price.toLocaleString() }}₸</div>
 
-      <div
-        class="flex items-center bg-[#F9F1E7] rounded-full w-max select-none"
-      >
+      <div class="flex items-center bg-[#F9F1E7] rounded-full w-max select-none">
         <button
           @click="decreaseQuantity(item.id)"
           class="text-xl px-3 hover:text-green-500 transition cursor-pointer"
@@ -68,3 +60,4 @@ const { cart, removeFromCart, increaseQuantity, decreaseQuantity } =
     </div>
   </div>
 </template>
+

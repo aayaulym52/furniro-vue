@@ -36,7 +36,7 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 
-defineEmits(["switch"]);
+const emit = defineEmits(["switch"]);
 
 const email = ref("");
 const password = ref("");
@@ -59,18 +59,6 @@ const login = async () => {
 
     const result = await res.json();
 
-        if (res.ok) {
-          localStorage.setItem("token", result.token);
-          alert("Вход выполнен!");
-          this.$router.push("/");
-        } else {
-          alert("Ошибка: " + (result.message || "Неверный email или пароль"));
-        }
-      } catch (err) {
-        alert("Ошибка входа: " + err.message);
-      }
-    },
-  },
     if (res.ok) {
       localStorage.setItem("token", result.token);
       localStorage.setItem("currentUser", JSON.stringify(result.user));
